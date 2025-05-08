@@ -1,0 +1,68 @@
+backend:
+  name: git-gateway
+  branch: main # Укажите ветку, с которой работает Netlify (main или master)
+
+publish_mode: editorial_workflow # Включить рабочий процесс с публикацией/рецензированием
+
+media_folder: "images/uploads" # Папка, куда будут загружаться изображения из CMS (путь относительно корня репозитория)
+public_folder: "/images/uploads" # Путь к загруженным изображениям на готовом сайте (путь относительно корня сайта)
+
+collections:
+  - name: "blog" # Название коллекции (используется в URL админки)
+    label: "Блог" # Название, которое будет отображаться в админке
+    folder: "content/blog" # Папка, где будут храниться файлы статей (путь относительно корня репозитория)
+    create: true # Разрешить создание новых записей
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Формат имени файла
+    fields: # Поля для редактирования в форме CMS
+      - {label: "Заголовок", name: "title", widget: "string"}
+      - {label: "Дата публикации", name: "date", widget: "datetime"}
+      - {label: "Категория", name: "categories", widget: "list", required: false} # Опциональное поле
+      - {label: "Текст статьи", name: "body", widget: "markdown"} # Поле для основного текста в формате Markdown
+
+  - name: "compositions"
+    label: "Композиции"
+    folder: "content/compositions" # Папка для файлов композиций
+    create: true
+    slug: "{{slug}}" # Формат имени файла (например, "nazvanie-proizvedeniya.yml")
+    fields:
+      - {label: "Название", name: "title", widget: "string"}
+      - {label: "Описание", name: "description", widget: "text"}
+      - {label: "SoundCloud Embed Code", name: "soundcloud_embed", widget: "string"} # Поле для embed-кода
+      - {label: "YouTube/Vimeo Embed Code (optional)", name: "video_embed", widget: "string", required: false} # Опциональное поле
+      - {label: "Жанры/Форматы", name: "genres", widget: "list", required: false} # Список жанров
+
+  - name: "sketches"
+    label: "Скетчи"
+    folder: "content/sketches" # Папка для файлов скетчей
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Название/Тема", name: "title", widget: "string"}
+      - {label: "Рабочие заметки", name: "notes", widget: "text"}
+      - {label: "Дата создания", name: "date", widget: "datetime"}
+      - {label: "SoundCloud Embed Code", name: "soundcloud_embed", widget: "string"}
+      - {label: "Настроение (optional)", name: "mood", widget: "string", required: false}
+
+  - name: "settings" # Отдельная коллекция для одиночных страниц или настроек
+    label: "Настройки сайта"
+    files:
+      - label: "Обо мне"
+        name: "about" # Имя файла (например, about.yml)
+        file: "content/settings/about.yml" # Путь к файлу
+        fields:
+          - {label: "Заголовок секции", name: "section_title", widget: "string"}
+          - {label: "Текст биографии", name: "bio", widget: "markdown"}
+          - {label: "Ваше фото", name: "photo", widget: "image", required: false} # Поле для загрузки фото
+          - {label: "Фестивали (optional)", name: "festivals", widget: "list", required: false}
+          - {label: "Коллаборации (optional)", name: "collaborations", widget: "list", required: false}
+          - {label: "Технические навыки (optional)", name: "skills", widget: "list", required: false}
+      - label: "Главная страница"
+        name: "home"
+        file: "content/settings/home.yml"
+        fields:
+          - {label: "Заголовок Hero", name: "hero_title", widget: "string"}
+          - {label: "Манифест/Интро", name: "manifesto", widget: "markdown"}
+          - {label: "Фоновое изображение (опционально)", name: "background_image", widget: "image", required: false}
+          # Поля для ключевых произведений можно добавить сюда или управлять ими в коллекции "compositions"
+          # - {label: "Ключевое произведение 1 (ссылка)", name: "featured_work_1_link", widget: "string"}
+          # ... и т.д.

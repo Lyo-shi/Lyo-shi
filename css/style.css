@@ -1,0 +1,593 @@
+/* Определение переменных для цветов */
+:root {
+    --bg-color: #1a1a1a; /* Очень темный фон */
+    --text-color: #e0e0e0; /* Светлый текст */
+    --primary-color: #007bff; /* Пример акцентного цвета (синий) */
+    --secondary-color: #2a2a2a; /* Цвет для карточек/блоков, чуть светлее фона */
+    --border-color: #444; /* Цвет границ */
+    --link-color: #00aaff; /* Цвет ссылок (голубой) */
+    --link-hover-color: #00ccff; /* Цвет ссылок при наведении */
+    --heading-color: #00aaff; /* Цвет заголовков */
+}
+
+/* Сброс базовых стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* Пример шрифта, замените на свой выбор */
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    overflow-x: hidden; /* Предотвращает горизонтальный скролл */
+    min-height: 100vh; /* Минимальная высота для темного фона на всю страницу */
+    display: flex;
+    flex-direction: column; /* Упорядочивает секции в столбец */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px; /* Ограничивает ширину контента */
+    margin: 0 auto; /* Центрирует контейнер */
+    padding: 0 15px;
+}
+
+/* Header */
+header {
+    background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный фон хедера */
+    padding: 1rem 0;
+    position: fixed; /* Фиксированный хедер */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Поверх остального контента */
+    backdrop-filter: blur(5px); /* Эффект размытия под хедером */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px; /* Размер лого */
+    /* filter: invert(1); Сделайте черное лого белым на темном фоне, если ваше лого изначально черное */
+    /* Убедитесь, что ваше лого хорошо видно на темном фоне */
+}
+.logo span {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 25px; /* Увеличил отступ */
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    position: relative; /* Для подчеркивания */
+    padding-bottom: 5px; /* Отступ для подчеркивания */
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0; /* Изначально нет подчеркивания */
+    height: 2px;
+    background-color: var(--link-hover-color);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%; /* Появляется подчеркивание при наведении */
+}
+nav a.active::after {
+     width: 100%; /* Подчеркивание для активной страницы */
+}
+
+
+/* Hero Section (Landing) */
+.hero {
+    height: 100vh; /* Высота на весь экран */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: #fff; /* Текст на этом фоне всегда белый */
+    padding-top: 80px; /* Учитываем фиксированный хедер */
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Затемнение фона увеличено */
+}
+
+.hero .container {
+     position: relative; /* Для правильного z-index контента */
+     z-index: 2; /* Выше затемняющего слоя */
+}
+
+.hero h1 {
+    font-size: 4em; /* Увеличил размер заголовка */
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Тень для читаемости */
+}
+
+.hero .manifesto {
+    font-size: 1.3em; /* Увеличил размер текста */
+    margin-bottom: 40px;
+    max-width: 900px; /* Увеличил ширину */
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 300; /* Сделал текст чуть тоньше */
+    opacity: 0.9; /* Сделал чуть менее ярким */
+}
+
+.hero-buttons .btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 12px 25px; /* Увеличил паддинг кнопок */
+    text-decoration: none;
+    margin: 0 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    text-transform: uppercase; /* Сделал текст кнопок заглавными */
+    letter-spacing: 1px;
+}
+
+.hero-buttons .btn:hover {
+    background-color: var(--link-hover-color); /* Цвет при наведении как у ссылок */
+    transform: translateY(-3px); /* Небольшой эффект поднятия */
+}
+
+/* Sections */
+section {
+    padding: 80px 0; /* Отступы секций */
+    position: relative; /* Для возможного использования фонов или эффектов */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 60px; /* Увеличил отступ */
+    color: var(--heading-color); /* Цвет заголовков секций */
+    font-size: 2.5em;
+    font-weight: bold;
+    position: relative;
+}
+h2::after {
+     content: '';
+     position: absolute;
+     left: 50%;
+     bottom: -15px;
+     transform: translateX(-50%);
+     width: 80px; /* Ширина подчеркивания заголовка */
+     height: 4px;
+     background-color: var(--primary-color); /* Цвет подчеркивания */
+     border-radius: 2px;
+}
+
+
+/* Featured Works (на главной) */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Адаптивная сетка */
+    gap: 40px;
+}
+
+.work-item {
+    background-color: var(--secondary-color);
+    padding: 25px; /* Увеличил паддинг */
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Тень для выделения карточек */
+    transition: transform 0.3s ease;
+}
+.work-item:hover {
+    transform: translateY(-5px); /* Эффект при наведении */
+}
+
+.work-item h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--link-hover-color);
+    font-size: 1.5em;
+}
+.work-item p {
+    margin-bottom: 15px;
+    font-size: 1em;
+    color: var(--text-color);
+}
+
+
+.work-item .video-embed,
+.soundcloud-embed {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio для видео */
+    height: 0;
+    overflow: hidden;
+    background-color: #000; /* Черный фон для плееров */
+}
+.soundcloud-embed {
+     padding-bottom: 0 !important; /* SoundCloud имеет фиксированную высоту */
+     height: 166px !important; /* Стандартная высота SoundCloud плеера */
+}
+.soundcloud-embed.mini {
+    height: 100px !important; /* Высота для мини-плеера скетчей */
+}
+
+
+.work-item .video-embed iframe,
+.soundcloud-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none; /* Убираем стандартную границу iframe */
+}
+
+.work-meta {
+    font-size: 0.9em;
+    color: #aaa; /* Более тусклый цвет для мета-информации */
+    margin-top: 10px;
+}
+
+
+/* Quote Section */
+.quote {
+    background-color: var(--secondary-color); /* Отличный фон для цитаты */
+    padding: 60px 0; /* Увеличил паддинг */
+    text-align: center;
+    font-style: italic;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1.4em; /* Увеличил размер текста цитаты */
+    color: var(--link-color); /* Цвет цитаты */
+}
+.quote blockquote {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+/* Footer */
+footer {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto; /* Прижимает футер к низу, если контента мало */
+}
+
+.social-links a {
+    color: var(--text-color);
+    margin: 0 12px; /* Увеличил отступ между ссылками */
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 1.1em; /* Увеличил размер текста ссылок */
+}
+
+.social-links a:hover {
+    color: var(--link-hover-color);
+}
+
+.contact-info,
+.copyright {
+    margin-top: 20px; /* Увеличил отступ */
+    font-size: 0.95em;
+    color: #aaa; /* Сделал текст чуть тусклее */
+}
+
+.contact-info a {
+     color: inherit; /* Наследует цвет родителя (#aaa) */
+     text-decoration: none;
+     border-bottom: 1px dashed var(--link-color); /* Подчеркивание пунктиром акцентным цветом */
+     transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+.contact-info a:hover {
+    color: var(--link-hover-color);
+    border-bottom-color: var(--link-hover-color);
+}
+
+
+/* --- Стили для других страниц --- */
+
+/* Общие стили для контентных страниц */
+body:not(.landing) {
+    padding-top: 120px; /* Увеличил отступ сверху, чтобы контент не скрывался под хедером */
+}
+
+.page-header {
+     padding-bottom: 40px; /* Отступ после заголовка страницы */
+}
+
+
+/* Раздел Compositions */
+.filter-controls {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.filter-btn {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+.filter-btn:hover {
+    background-color: var(--border-color);
+    color: var(--link-hover-color);
+}
+.filter-btn.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+}
+/* Скрыть элементы при фильтрации (нужен JS) */
+.work-item.hidden {
+    display: none;
+}
+
+
+/* Раздел Sketches */
+.sketches-list {
+    /* Можете добавить стили сетки или просто оставить элементы в столбец */
+}
+.sketches-list .sketch-item {
+     background-color: var(--secondary-color);
+     padding: 20px; /* Увеличил паддинг */
+     margin-bottom: 30px; /* Увеличил отступ */
+     border-radius: 8px;
+     border: 1px solid var(--border-color);
+     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+.sketches-list .sketch-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--link-hover-color);
+    font-size: 1.3em;
+}
+.sketches-list .sketch-item p {
+    margin-bottom: 15px;
+    font-size: 1em;
+}
+.sketches-list .sketch-item .sketch-meta {
+    font-size: 0.9em;
+    color: #aaa;
+    margin-top: 10px;
+}
+
+
+/* Раздел Blog */
+.blog-posts {
+     /* Можете добавить стили сетки или просто оставить элементы в столбец */
+}
+.blog-posts .post-item {
+    background-color: var(--secondary-color);
+    padding: 25px; /* Увеличил паддинг */
+    margin-bottom: 40px; /* Увеличил отступ */
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+.blog-posts .post-item h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--link-hover-color);
+    font-size: 1.8em; /* Увеличил размер заголовка поста */
+}
+.blog-posts .post-item .post-meta {
+    font-size: 0.95em;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+.blog-posts .post-item .post-content p {
+    margin-bottom: 1em; /* Отступ между абзацами в посте */
+    line-height: 1.7;
+}
+
+/* Раздел About */
+.about-content {
+    display: flex;
+    flex-wrap: wrap; /* Перенос элементов на новую строку на маленьких экранах */
+    gap: 60px; /* Увеличил расстояние между элементами */
+    align-items: flex-start; /* Выравнивание элементов по верху */
+}
+
+.about-photo {
+    flex: 1; /* Элемент занимает доступное пространство */
+    min-width: 280px; /* Минимальная ширина элемента перед переносом */
+    max-width: 400px; /* Максимальная ширина фото */
+    text-align: center; /* Центрирование фото, если оно меньше max-width */
+}
+.about-photo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Скругленные углы фото */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.about-text {
+    flex: 2; /* Текст занимает больше пространства */
+    min-width: 300px; /* Минимальная ширина текста */
+}
+
+.about-text h3 {
+    color: var(--heading-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 2em; /* Увеличил размер заголовка */
+}
+.about-text p {
+    margin-bottom: 15px;
+    line-height: 1.7;
+}
+
+.about-text h4 {
+    color: var(--link-color);
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+.about-text ul {
+    margin-left: 25px;
+    list-style: disc; /* Маркеры для списков */
+}
+.about-text ul li {
+    margin-bottom: 5px;
+}
+
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .logo {
+        margin-bottom: 10px;
+    }
+    nav ul {
+        margin-top: 10px;
+        justify-content: center;
+        padding: 0;
+    }
+    nav ul li {
+        margin: 0 8px; /* Уменьшил отступ между ссылками */
+    }
+    nav a::after { /* Убираем подчеркивание на маленьких экранах */
+        display: none;
+    }
+     nav a.active {
+        text-decoration: underline; /* Простой подчеркивание для активной на мобильных */
+     }
+
+    .hero {
+        padding-top: 100px; /* Увеличиваем отступ, чтобы хедер не перекрывал */
+    }
+    .hero h1 {
+        font-size: 2.5em;
+    }
+    .hero .manifesto {
+        font-size: 1.1em;
+    }
+    .hero-buttons {
+        display: flex; /* Кнопки в строку */
+        flex-wrap: wrap; /* Если не помещаются, перенос */
+        justify-content: center;
+    }
+    .hero-buttons .btn {
+         display: inline-block; /* Возвращаем inline-block */
+         margin: 5px; /* Уменьшаем отступ */
+         width: auto; /* Авто ширина */
+         padding: 10px 15px;
+         font-size: 0.9em;
+    }
+
+    section {
+        padding: 60px 0; /* Уменьшаем отступы секций */
+    }
+    h2 {
+         font-size: 2em;
+         margin-bottom: 40px;
+    }
+
+    .quote {
+        padding: 40px 0;
+        font-size: 1.2em;
+    }
+
+    .about-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .about-photo,
+    .about-text {
+        min-width: unset;
+        width: 100%;
+    }
+    .about-photo {
+        max-width: 100%; /* Фото занимает всю ширину */
+    }
+    .about-text h3 {
+         font-size: 1.8em;
+    }
+
+    .filter-btn {
+        margin-bottom: 10px; /* Отступ между кнопками на мобильных */
+    }
+
+    .blog-posts .post-item h3 {
+        font-size: 1.5em;
+    }
+}
+
+/* Адаптивность для очень маленьких экранов */
+@media (max-width: 480px) {
+    nav ul {
+        flex-direction: column; /* Навигация в столбец */
+        text-align: center;
+    }
+    nav ul li {
+        margin: 5px 0;
+    }
+    .hero h1 {
+        font-size: 2em;
+    }
+    .hero .manifesto {
+        font-size: 1em;
+    }
+     .hero-buttons .btn {
+         margin: 5px auto;
+         width: 90%;
+     }
+    h2 {
+        font-size: 1.8em;
+    }
+    .work-grid {
+        gap: 20px;
+    }
+    .work-item,
+    .sketch-item,
+    .post-item {
+        padding: 15px;
+    }
+    .quote {
+        font-size: 1em;
+        padding: 30px 0;
+    }
+}
